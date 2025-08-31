@@ -42,7 +42,7 @@ spec:
           env:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          command: ["sleep", "infinity"]
+          command: ["/bin/sh", "-c", "cp /app/ConfigTemplate/* /app/Config/ && dotnet Server.dll"]
           {{- with .Values.app.args }}
           args:
             {{- toYaml . | nindent 12 }}

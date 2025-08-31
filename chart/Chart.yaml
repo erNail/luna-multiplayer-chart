@@ -22,5 +22,5 @@ annotations:
 version: "0.0.0"
 
 # renovate: image=ghcr.io/ernail/luna-multiplayer
-appVersion: "1.0.0-rc17358358500"
+appVersion: "1.0.0-rc25600399908"
 ...

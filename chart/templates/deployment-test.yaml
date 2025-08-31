@@ -362,9 +362,14 @@ tests:
             - name: "data-logs"
               persistentVolumeClaim:
                 claimName: "data-logs"
-            - name: "config"
+            - name: "data-plugins"
+              persistentVolumeClaim:
+                claimName: "data-plugins"
+            - name: "config-template"
               configMap:
                 name: "config"
+            - name: "config"
+              emptyDir: {}
 
   - it: "should render volumes as set"
     set:

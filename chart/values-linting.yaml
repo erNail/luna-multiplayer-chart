@@ -16,6 +16,8 @@ persistence:
     enabled: true
   logs:
     enabled: true
+  plugins:
+    enabled: true
 
 ingress:
   enabled: true

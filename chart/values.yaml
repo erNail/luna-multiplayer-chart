@@ -1049,6 +1049,22 @@ persistence:
     size: "2Gi"
     # -- The storage class of the persistent volume claim.
     storageClass: ""
+  # -- Persistence configuration for the `plugins` data
+  plugins:
+    # -- Whether to enable persistence.
+    enabled: false
+    # -- The name of the persistent volume claim.
+    # The name should reference the PersistentVolumeClaim defined at `.Values.volumes`.
+    pvcName: "data-plugins"
+    # -- Annotations to add to the persistent volume claim.
+    annotations: {}
+    # -- The access modes of the persistent volume claim.
+    accessModes:
+      - "ReadWriteOnce"
+    # -- The size of the persistent volume claim.
+    size: "2Gi"
+    # -- The storage class of the persistent volume claim.
+    storageClass: ""
 
 # -- Volume Mounts configuration.
 #
@@ -1060,9 +1076,21 @@ volumeMounts:
   # -- The name should reference the volume defined at `.Values.volumes`.
   - name: "data-logs"
     mountPath: "/app/logs"
+  # -- The name should reference the volume defined at `.Values.volumes`.
+  - name: "data-plugins"
+    mountPath: "/app/Plugins"
+  # -- The name should reference the volume defined at `.Values.volumes`.
+  # Luna Multiplayer requires the configuration files at /app/Config to be writable.
+  # To achieve this, we mount the ConfigMap at /app/ConfigTemplate
+  # and on startup copy its contents to an emptyDir mounted ad /app/Config.
+  - name: "config-template"
+    mountPath: "/app/ConfigTemplate"
+  # -- The name should reference the volume defined at `.Values.volumes`.
+  # Luna Multiplayer requires the configuration files at /app/Config to be writable.
+  # To achieve this, we mount the ConfigMap at /app/ConfigTemplate
+  # and on startup copy its contents to an emptyDir mounted ad /app/Config.
   - name: "config"
     mountPath: "/app/Config"
-    # readOnly: true
 
 # -- Volumes configuration.
 #
@@ -1081,11 +1109,25 @@ volumes:
     persistentVolumeClaim:
       claimName: "data-logs"
   # -- The volume name should reference the volumeMounts defined at `.Values.volumeMounts`.
+  # The PersistentVolumeClaim name should reference the PersistenVolumeClaim name at
+  # `.Values.persistence.logs.pvcName`.
+  - name: "data-plugins"
+    persistentVolumeClaim:
+      claimName: "data-plugins"
+  # -- The volume name should reference the volumeMounts defined at `.Values.volumeMounts`.
   # The ConfigMap name should reference the ConfigMap name at `.Values.configMap.name`.
-  - name: "config"
+  # Luna Multiplayer requires the configuration files at /app/Config to be writable.
+  # To achieve this, we mount the ConfigMap at /app/ConfigTemplate
+  # and on startup copy its contents to an emptyDir mounted ad /app/Config.
+  - name: "config-template"
     configMap:
       name: "config"
-      defaultMode: 0644
+  # -- The volume name should reference the volumeMounts defined at `.Values.volumeMounts`.
+  # Luna Multiplayer requires the configuration files at /app/Config to be writable.
+  # To achieve this, we mount the ConfigMap at /app/ConfigTemplate
+  # and on startup copy its contents to an emptyDir mounted ad /app/Config.
+  - name: "config"
+    emptyDir: {}
 
 # -- Configuration for service accounts.
 #

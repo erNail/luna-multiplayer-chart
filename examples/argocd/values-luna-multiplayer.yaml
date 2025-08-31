@@ -21,6 +21,10 @@ persistence:
     enabled: true
     size: "1Gi"
     storageClass: "longhorn"
+  plugins:
+    enabled: true
+    size: "1Gi"
+    storageClass: "longhorn"
 
 service:
   type: "LoadBalancer"
@@ -146,7 +150,7 @@ configMap:
         <!--Starting Funds-->
         <StartingFunds>25000</StartingFunds>
         <!--Starting Science-->
-        <StartingScience>0</StartingScience>
+        <StartingScience>1500</StartingScience>
         <!--Starting Reputation-->
         <StartingReputation>0</StartingReputation>
         <!--Science Rewards-->
@@ -162,7 +166,7 @@ configMap:
         <!--Decline Penalty-->
         <RepLossDeclined>1</RepLossDeclined>
         <!--Enable Kerbal Experience-->
-        <KerbalExp>true</KerbalExp>
+        <KerbalExp>false</KerbalExp>
         <!--Kerbals Level Up Immediately-->
         <ImmediateLevelUp>false</ImmediateLevelUp>
         <!--Allow Negative Funds/Science-->
@@ -243,7 +247,7 @@ configMap:
         <!--Specify the Name that will appear when you send a message using the server's console.-->
         <ConsoleIdentifier>Server</ConsoleIdentifier>
         <!--Specify the gameplay difficulty of the server. Values: Easy, Normal, Moderate, Hard, Custom-->
-        <GameDifficulty>Normal</GameDifficulty>
+        <GameDifficulty>Custom</GameDifficulty>
         <!--Specify the game Type. Values: Sandbox, Career, Science-->
         <GameMode>Science</GameMode>
         <!--Enable mod control.

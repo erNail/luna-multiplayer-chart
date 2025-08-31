@@ -1,0 +1,24 @@
+{{- if .Values.persistence.plugins.enabled }}
+---
+kind: "PersistentVolumeClaim"
+apiVersion: {{ .Values.apiVersions.persistentVolumeClaim | quote }}
+metadata:
+  name: {{ .Values.persistence.plugins.pvcName | quote }}
+  namespace: {{ include "names.namespace" . | quote }}
+  labels:
+    {{- include "labels.commonLabels" . | nindent 4 }}
+  {{- with .Values.persistence.plugins.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  accessModes:
+  {{- range .Values.persistence.plugins.accessModes }}
+    - {{ . | quote}}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.plugins.size | quote }}
+  storageClassName: {{ .Values.persistence.plugins.storageClass | quote }}
+...
+{{- end }}
