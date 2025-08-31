@@ -1,0 +1,26 @@
+---
+apiVersion: "v2"
+name: "luna-multiplayer"
+description: "A lightweight Helm chart for Luna Multiplayer that prioritizes transparency and flexibility."
+type: "application"
+icon: "https://avatars.githubusercontent.com/u/34459539?s=200&v=4"
+keywords:
+  - "kerbal-space-program"
+  - "ksp"
+  - "luna-multiplayer"
+  - "game-server"
+maintainers:
+  - name: "ernail"
+    email: "nagel.eric.95@googlemail.com"
+annotations:
+  artifacthub.io/license: "MIT"
+  artifacthub.io/links: |
+    - name: source
+      url: https://github.com/erNail/luna-multiplayer-chart
+    - name: support
+      url: https://github.com/erNail/luna-multiplayer-chart/issues
+version: "0.0.0"
+
+# renovate: image=ghcr.io/ernail/luna-multiplayer
+appVersion: "1.0.0-rc17358358500"
+...
